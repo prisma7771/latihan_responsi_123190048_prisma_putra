@@ -6,14 +6,13 @@ import 'package:latihan_responsi_123190048/model_user_api/github_user_repos_mode
 class GithubAPI {
   static const String baseUrl = "https://api.github.com";
   static Future<Map<String, dynamic>> get(String partUrl) async {
-    var uname = 'username';
-    var pword = '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';
-    var authn = 'Basic ' + base64Encode(utf8.encode('$uname:$pword'));
+    // var uname = 'username';
+    // var pword = 'your token';
+    // var authn = 'Basic ' + base64Encode(utf8.encode('$uname:$pword'));
 
     final String fullUrl = baseUrl + "/" + partUrl;
-    ("BaseNetwork - fullUrl : $fullUrl");
-    final response = await http.get(Uri.parse(fullUrl),headers: {'Authorization': authn});
-    ("BaseNetwork - response : ${response.body}");
+    // final response = await http.get(Uri.parse(fullUrl),headers: {'Authorization': authn});
+    final response = await http.get(Uri.parse(fullUrl));
     return _processResponse(response);
   }
   static Future<Map<String, dynamic>> _processResponse(
@@ -29,14 +28,13 @@ class GithubAPI {
   }
 
   static Future<List<UserReposModel>> getRepos(String partUrl) async {
-    var uname = 'username';
-    var pword = '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';
-    var authn = 'Basic ' + base64Encode(utf8.encode('$uname:$pword'));
+    // var uname = 'username';
+    // var pword = 'your token';
+    // var authn = 'Basic ' + base64Encode(utf8.encode('$uname:$pword'));
 
     final String fullUrl = baseUrl + "/" + partUrl;
-    ("BaseNetwork - fullUrl : $fullUrl");
-    final response = await http.get(Uri.parse(fullUrl),headers: {'Authorization': authn});
-    // ("BaseNetwork - response : ${response.body}");
+    final response = await http.get(Uri.parse(fullUrl));
+    // final response = await http.get(Uri.parse(fullUrl),headers: {'Authorization': authn});
     return _processResponse2(response);
   }
   static Future<List<UserReposModel>> _processResponse2(
@@ -49,14 +47,13 @@ class GithubAPI {
 }
 
   static Future<List<UserDetailModel>> getFollowers(String partUrl) async {
-    var uname = 'username';
-    var pword = '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';
-    var authn = 'Basic ' + base64Encode(utf8.encode('$uname:$pword'));
+    // var uname = 'username';
+    // var pword = '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';
+    // var authn = 'Basic ' + base64Encode(utf8.encode('$uname:$pword'));
 
     final String fullUrl = baseUrl + "/" + partUrl;
-    ("BaseNetwork - fullUrl : $fullUrl");
-    final response = await http.get(Uri.parse(fullUrl),headers: {'Authorization': authn});
-    // ("BaseNetwork - response : ${response.body}");
+    final response = await http.get(Uri.parse(fullUrl));
+    // final response = await http.get(Uri.parse(fullUrl),headers: {'Authorization': authn});
     return _processResponse3(response);
   }
   static Future<List<UserDetailModel>> _processResponse3(
