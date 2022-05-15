@@ -10,7 +10,13 @@ class ImagePickerSection extends StatefulWidget {
   final String image;
   final String password;
   final String history;
-  const ImagePickerSection({Key? key, required this.username, required this.image, required this.password, required this.history}) : super(key: key);
+  const ImagePickerSection(
+      {Key? key,
+      required this.username,
+      required this.image,
+      required this.password,
+      required this.history})
+      : super(key: key);
 
   @override
   _ImagePickerSectionState createState() => _ImagePickerSectionState();
@@ -47,8 +53,8 @@ class _ImagePickerSectionState extends State<ImagePickerSection> {
         labelButton: "Import Dari Camera",
         submitCallback: (value) {
           imagePath = '';
-          ImagePickerHelper().getImageFromCamera((value) =>
-              _processImage(value));
+          ImagePickerHelper()
+              .getImageFromCamera((value) => _processImage(value));
         });
   }
 
@@ -57,8 +63,8 @@ class _ImagePickerSectionState extends State<ImagePickerSection> {
         labelButton: "Import Dari Gallery",
         submitCallback: (value) {
           imagePath = '';
-          ImagePickerHelper().getImageFromGallery((value) =>
-              _processImage(value));
+          ImagePickerHelper()
+              .getImageFromGallery((value) => _processImage(value));
         });
   }
 
@@ -74,17 +80,16 @@ class _ImagePickerSectionState extends State<ImagePickerSection> {
       radius: 100,
       child: CircleAvatar(
         radius: 95,
-        backgroundImage: Image
-            .file(
+        backgroundImage: Image.file(
           File(imagePath),
           fit: BoxFit.cover,
-        )
-            .image,
+        ).image,
       ),
     );
   }
 
   void _processImage(String? value) async {
+    String saved = await SharedPreference.getImage();
     if (value != null) {
       setState(() {
         if (imagePath == "") {
@@ -95,11 +100,10 @@ class _ImagePickerSectionState extends State<ImagePickerSection> {
         _hive.updateImage(
             widget.username, widget.password, widget.history, imagePath);
       });
-      } else {
-        imagePath = widget.image;
-      }
-
+    } else {
+      setState(() {
+        imagePath = saved;
+      });
     }
-
-
+  }
 }
