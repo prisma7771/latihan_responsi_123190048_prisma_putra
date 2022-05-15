@@ -22,7 +22,6 @@ class GithubAPI {
       final jsonBody = json.decode(body);
       return jsonBody;
     } else {
-      ("processResponse error");
       return {"error": true};
     }
   }
@@ -48,7 +47,7 @@ class GithubAPI {
 
   static Future<List<UserDetailModel>> getFollowers(String partUrl) async {
     // var uname = 'username';
-    // var pword = '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';
+    // var pword = 'your token';
     // var authn = 'Basic ' + base64Encode(utf8.encode('$uname:$pword'));
 
     final String fullUrl = baseUrl + "/" + partUrl;

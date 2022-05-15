@@ -19,6 +19,7 @@ class ImagePickerSection extends StatefulWidget {
 class _ImagePickerSectionState extends State<ImagePickerSection> {
   late final HiveDatabase _hive = HiveDatabase();
   String imagePath = "";
+
   @override
   initState() {
     super.initState();
@@ -26,6 +27,7 @@ class _ImagePickerSectionState extends State<ImagePickerSection> {
       widget.image.isEmpty ? imagePath = "" : imagePath = widget.image;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -43,23 +45,25 @@ class _ImagePickerSectionState extends State<ImagePickerSection> {
   Widget _buttonSectionCamera() {
     return CommonSubmitButton(
         labelButton: "Import Dari Camera",
-        submitCallback: (value){
-          imagePath='';
-          ImagePickerHelper().getImageFromCamera((value) => _processImage(value));
+        submitCallback: (value) {
+          imagePath = '';
+          ImagePickerHelper().getImageFromCamera((value) =>
+              _processImage(value));
         });
   }
 
   Widget _buttonSectionGallery() {
     return CommonSubmitButton(
         labelButton: "Import Dari Gallery",
-        submitCallback: (value){
-          imagePath='';
-          ImagePickerHelper().getImageFromGallery((value) => _processImage(value));
+        submitCallback: (value) {
+          imagePath = '';
+          ImagePickerHelper().getImageFromGallery((value) =>
+              _processImage(value));
         });
   }
 
   Widget _imageSection() {
-    if(imagePath.isEmpty) {
+    if (imagePath.isEmpty) {
       return const CircleAvatar(
         radius: 100.0,
         child: Center(child: Text("NO PHOTO")),
@@ -70,17 +74,19 @@ class _ImagePickerSectionState extends State<ImagePickerSection> {
       radius: 100,
       child: CircleAvatar(
         radius: 95,
-        backgroundImage: Image.file(
+        backgroundImage: Image
+            .file(
           File(imagePath),
           fit: BoxFit.cover,
-        ).image,
+        )
+            .image,
       ),
     );
   }
 
   void _processImage(String? value) async {
-    if(value != null) {
-      setState((){
+    if (value != null) {
+      setState(() {
         if (imagePath == "") {
           imagePath = value;
         }
@@ -89,11 +95,11 @@ class _ImagePickerSectionState extends State<ImagePickerSection> {
         _hive.updateImage(
             widget.username, widget.password, widget.history, imagePath);
       });
+      } else {
+        imagePath = widget.image;
+      }
+
     }
-  }
+
 
 }
-
-
-
-
