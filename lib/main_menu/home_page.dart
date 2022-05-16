@@ -163,8 +163,9 @@ class _HomepageState extends State<Homepage> {
                         });
                       }
                       SharedPreference().setHistory(_search);
+                      String imagePref = await SharedPreference.getImage();
                       _hive.updateHistory(
-                          widget.username, widget.password, _search, widget.image,);
+                          widget.username, widget.password, _search, imagePref);
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) {
                         return DetailUserPage(

@@ -94,15 +94,17 @@ class _ImagePickerSectionState extends State<ImagePickerSection> {
       setState(() {
         if (imagePath == "") {
           imagePath = value;
+          SharedPreference().setImage(imagePath);
+          _hive.updateImage(
+              widget.username, widget.password, widget.history, imagePath);
         }
-        debugPrint(imagePath);
-        SharedPreference().setImage(imagePath);
-        _hive.updateImage(
-            widget.username, widget.password, widget.history, imagePath);
       });
     } else {
       setState(() {
         imagePath = saved;
+        SharedPreference().setImage(imagePath);
+        _hive.updateImage(
+            widget.username, widget.password, widget.history, imagePath);
       });
     }
   }
